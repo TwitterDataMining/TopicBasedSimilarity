@@ -16,10 +16,16 @@ Use : when pretrained word2vec is used
 """
 import logging
 
+# Input arguments
+PROGRAM_DESCRIPTION = "Clean the word vectors"
+parser = argparse.ArgumentParser(description=PROGRAM_DESCRIPTION)
+parser.add_argument('document_file', type=str, help='file containing preprocessed tweets')
+parser.add_argument('vector_file', type=str, help='pretrained word vectors')
+args = vars(parser.parse_args())
+
 def main():
-    filename = "../data_gathering/24Legacy1000/24Legacy1000_text.csv"
-    #vector_file = "../data/glove_vector/glove.twitter.27B.200d.txt"
-    vector_file = "data/24Legacy1000/24Legacy1000_username_word2vec.model.txt"
+    filename = args['document_file']
+    vector_file = args['vector_file']
     log_file = filename.rpartition('.')[0] + "_remove_uncommon.log"
     logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s %(message)s')
     make_clean_file(filename, vector_file)
