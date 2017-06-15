@@ -32,6 +32,8 @@ parser = argparse.ArgumentParser(description=PROGRAM_DESCRIPTION)
 parser.add_argument('collection_name', type=str, help='collection_to_read_tweets')
 parser.add_argument('directory', type=str, help='directory to store')
 parser.add_argument('unique_user_file', type=str, help='path to unique user list in csv')
+parser.add_argument('prefix', type=str, help='used in output file name eg hashtag')
+
 args = vars(parser.parse_args())
 
 # initializing lemmatizer
@@ -44,6 +46,7 @@ def main():
     collection_name = args['collection_name']
     dir = args['directory']
     unique_user_file = args['unique_user_file']
+    DIRECTORY = args['prefix']
 
     try:
         os.stat(dir)
